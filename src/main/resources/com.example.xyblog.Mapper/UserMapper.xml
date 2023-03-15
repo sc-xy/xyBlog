@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.UserMapper">
+    <select id="checkUsernameAndPassword" resultType="com.example.xyblog.Bean.User">
+        select u.id, u.nick_name, u.user_name, u.pass_word, u.email, u.avatar, u.is_admin, u.create_time
+        from xuyang.t_user u
+        where u.user_name = #{username} and u.pass_word = #{password}
+    </select>
+</mapper>

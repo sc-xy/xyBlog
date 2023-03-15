@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.MessageMapper">
+    <insert id="saveMessage" parameterType="com.example.xyblog.Bean.Message">
+        insert into xuyang.t_message (email, nick_name, content, avatar, create_time, parent_message_id, parent_nick_name, admin_message)
+        values (#{email}, #{nickName}, #{content}, #{avatar}, #{createTime}, #{parentMessageId}, #{parentNickName}, #{adminMessage})
+    </insert>
+
+    <select id="findByParentIdNull" resultType="com.example.xyblog.Bean.Message" >
+        select *
+        from xuyang.t_message m
+        where m.parent_message_id = #{ParentId}
+        order by m.create_time desc
+    </select>
+
+    <select id="findByParentIdNotNull" resultType="com.example.xyblog.Bean.Message">
+        select *
+        from xuyang.t_message m
+        where m.parent_message_id = #{id}
+        order by m.create_time desc
+    </select>
+
+
+    <!--查询二级以及所有子集回复-->
+    <select id="findByReplyId" resultType="com.example.xyblog.Bean.Message">
+        select *
+        from xuyang.t_message c
+        where c.parent_message_id = #{childId}
+        order by c.create_time desc
+    </select>
+
+    <!--删除留言-->
+    <delete id="deleteMessage">
+        delete from t_message where id=#{id}
+    </delete>
+</mapper>

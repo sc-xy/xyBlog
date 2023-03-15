@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${blog.title}"></title>
+    <link href="/static/images/xyavatar.ico"  th:href="@{/images/xyavatar.ico}" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/css/timeline.css" th:href="@{/css/timeline.css}">
+
+</head>
+<body>
+
+<!--导航-->
+<nav class="gird-header">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <a href="#" th:href="@{/}"><h2 class="ui olive header item" style="font-family: STSong">某洋</h2></a>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide "><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide"><i class="clock icon"></i>时间轴</a>
+            <a href="#" th:href="@{/message}" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
+            <a href="#" th:href="@{/friends}" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友人帐</a>
+            <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <!--</div>-->
+            <div class="right m-item item m-mobile-hide">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+                        <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--顶部图片-->
+<div class="m-bg-type_outer" style="width: 100%;height: 50%">
+    <img src="/static/images/xingkong.jpeg" th:src="@{${blog.picture}}" alt="" class="ui m-bg image" style="width: 100%;height: 100%">
+    <div class="m-bg-class_coverBlog">
+        <div class="ui container" style="position: relative ;bottom: -540px;">
+            <h2 class="m-font-size-title-large" align="center" th:text="${blog.title}">Markdown编辑</h2>
+            <div class="ui container" align="center">
+                <div class="ui horizontal link list" align="center">
+                    <div class="item">
+                        <i class="calendar icon m-font-size-text-mini"></i>
+                        <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}" class="m-font-size-text-mini">2020-01-01</span>
+                    </div>
+                    <div class="item">
+                        <i class="clone icon m-font-size-text-mini"></i>
+                        <a href="#" target="_blank" style="color: #ffffff;font-size: 16px" th:text="${blog.typeName}">我的故事</a>
+                    </div>
+                    <div class="item">
+                        <i class="eye icon m-font-size-text-mini"></i> <span th:text="${blog.views}" class="m-font-size-text-mini">2222</span>
+                    </div>
+                    <div class="item">
+                        <i class="comment outline icon m-font-size-text-mini"></i>
+                        <span th:text="${blog.commentCount}" class="m-font-size-text-mini">2222</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--中间内容-->
+<div id="waypoint" class="m-margin- animated fadeIn">
+    <div class="ui container m-opacity box-shadow-max">
+        <!--内容-->
+        <div class="ui attached padded segment">
+
+
+            <!--中间主要内容部分-->
+            <div id="content" class="typo  typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${blog.content}">
+
+                <h3 id="section3">附录</h3>
+
+                <h5 id="appendix1">1、<i class="serif">Typo.css</i> 排版偏重点</h5>
+                <table class="ui table" summary="Typo.css 排版偏重点">
+                    <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>语义</th>
+                        <th>标签</th>
+                        <th>注意点</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>斜体</td>
+                        <td><code>i</code></td>
+                        <td>只设置一种斜体，让 <code>em</code> 和 <code>cite</code> 显示为正体</td>
+                    </tr>
+                    <tr>
+                        <td>强调</td>
+                        <td><code>em</code></td>
+                        <td>在全局显示正体，在 <code>.typo</code> 中显示与 <code>b</code> 和 <code>strong</code> 的样式一致，为粗体</td>
+                    </tr>
+                    <tr>
+                        <td>加强</td>
+                        <td><code>strong/b</code></td>
+                        <td>显示为粗体</td>
+                    </tr>
+                    <tr>
+                        <td>标记</td>
+                        <td><code>mark</code></td>
+                        <td>类似荧光笔</td>
+                    </tr>
+                    <tr>
+                        <td>印刷</td>
+                        <td><code>small</code></td>
+                        <td>保持为正确字体的 80% 大小，颜色设置为浅灰色</td>
+                    </tr>
+                    <tr>
+                        <td>表格</td>
+                        <td><code>table</code></td>
+                        <td>全局不显示线条，在 <code>table</code> 中显示表格外框，并且表头有浅灰背景</td>
+                    </tr>
+                    <tr>
+                        <td>代码</td>
+                        <td><code>pre</code>/<code>code</code></td>
+                        <td>字体使用 <code>courier</code> 系字体，保持与 <code>serif</code> 有比较一致的显示效果</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="5">特殊符号</th>
+                        <td>着重号</td>
+                        <td><em class="typo-em">在文字下加点</em></td>
+                        <td>在支持 <code>:after</code> 和 <code>:before</code> 的浏览器可以做渐进增强实现</td>
+                    </tr>
+                    <tr>
+                        <td>专名号</td>
+                        <td><u>林建锋</u></td>
+                        <td>专名号，有下划线，使用 <code>u</code> 或都 <code>.typo-u</code> 类</td>
+                    </tr>
+                    <tr>
+                        <td>破折号</td>
+                        <td>——</td>
+                        <td>保持一划，而非两划</td>
+                    </tr>
+                    <tr>
+                        <td>人民币</td>
+                        <td>&yen;</td>
+                        <td>使用两平等线的符号，或者 HTML 实体符号 <code>&amp;yen;</code></td>
+                    </tr>
+                    <tr>
+                        <td>删除符</td>
+                        <td>
+                            <del>已删除（deleted）</del>
+                        </td>
+                        <td>一致化各浏览器显示，中英混排正确</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="3">加强类</th>
+                        <td>专名号</td>
+                        <td><code>.typo-u</code></td>
+                        <td>由于 <code>u</code> 被 HTML4 放弃，在向后兼容上推荐使用 <code>.typo-u</code></td>
+                    </tr>
+                    <tr>
+                        <td>着重符</td>
+                        <td><code>.typo-em</code></td>
+                        <td>利用 <code>:after</code> 和 <code>:before</code> 实现着重符</td>
+                    </tr>
+                    <tr>
+                        <td>清除浮动</td>
+                        <td><code>.clearfix</code></td>
+                        <td>与一般 CSS Reset 保持一对致 API</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="5">注意点</th>
+                        <td colspan="3">（1）中英文混排行高/行距</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">（2）上下标在 IE 中显示效果</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">（3）块/段落分割空白是否符合设计原则</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">（4）input 多余空间问题</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">（5）默认字体色彩，目前采用 <code>#333</code> 在各种浏览显示比较好</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h5 id="appendix2">2、开源许可</h5>
+
+            </div>
+
+            <div class="ui horizontal divider">end</div>
+
+        </div>
+        <div  class="ui bottom attached segment" th:if="${blog.commentable}">
+            <!--评论区域列表-->
+            <div id="comment-container"  class="ui teal segment">
+                <div th:fragment="commentList">
+                    <div class="ui threaded comments" style="max-width: 100%;">
+                        <h3 class="ui dividing header">评论</h3>
+                        <div class="comment" th:each="comment : ${comments}">
+                            <a class="avatar">
+                                <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
+                            </a>
+                            <div class="content">
+                                <a class="author" >
+                                    <span th:text="${comment.nickName}">Matt</span>
+                                    <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${comment.adminComment}">博主</div>
+                                </a>
+                                <div class="metadata">
+                                    <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                </div>
+                                <div class="text" th:text="${comment.content}">
+                                    How artistic!
+                                </div>
+                                <div class="actions">
+                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickName}" onclick="reply(this)">回复</a>
+                                    <a class="delete" href="#" th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.blogId},param2=${comment.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>
+                                </div>
+                            </div>
+                            <!--子集评论-->
+                            <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                                <div class="comment" th:each="reply : ${comment.replyComments}">
+                                    <a class="avatar">
+                                        <img src="https://unsplash.it/100/100?image=1005" th:src="@{${reply.avatar}}">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author" >
+                                            <span th:text="${reply.nickName}">小红</span>
+                                            <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
+                                            &nbsp;<span th:text="|@ ${reply.parentNickName}|" class="m-teal">@ 小白</span>
+                                        </a>
+                                        <div class="metadata">
+                                            <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                        </div>
+                                        <div class="text" th:text="${reply.content}">
+                                            How artistic!
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickName}" onclick="reply(this)">回复</a>
+                                            <a class="delete" href="#" th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.blogId},param2=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>
+                                            <!--<a class="delete" href="#" th:href="@{/comment/{id}/delete(id=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>-->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="comment-form" class="ui form">
+                <input type="hidden" name="blogId" th:value="${blog.id}">
+                <input type="hidden" name="parentCommentId" value="-1">
+                <div class="field">
+                    <textarea name="content" placeholder="请输入评论信息..."></textarea>
+                </div>
+                <div class="fields">
+                    <div class="field m-mobile-wide m-margin-bottom-small">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="nickName" placeholder="QQ" th:value="${session.user}!=null ? ${session.user.nickName}">
+                        </div>
+                    </div>
+                    <div class="field m-mobile-wide m-margin-bottom-small">
+                        <div class="ui left icon input">
+                            <input type="hidden" name="email" placeholder="邮箱" value="3148537853@qq.com">
+                        </div>
+                    </div>
+                    <div class="field  m-margin-bottom-small m-mobile-wide">
+                        <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
+    <div class="ui vertical icon buttons ">
+        <button type="button" class="ui toc teal button" >目录</button>
+        <a href="#comment-container" class="ui teal button" >评论</a>
+        <!--<button class="ui wechat icon button"><i class="weixin icon"></i></button>-->
+        <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+    </div>
+</div>
+
+<div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
+    <ol class="js-toc">
+
+    </ol>
+</div>
+
+<div id="qrcode" class="ui wechat-qr flowing popup transition hidden "style="width: 130px !important;">
+</div>
+
+
+
+<br>
+<br>
+<!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="seven wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+                <div class="ui inverted link list">
+                    <div href="#" class="m-text-thin">Email：3148537853@qq.com</div>
+                    <div href="#" class="m-text-thin">QQ：3148537853</div>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
+                <!--<p id="htmer_time" class="item m-text-thin"></p>-->
+                <div id="blog-message">
+                    <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 2000 </h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 2000 </h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 2000 </h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 2000 </h2> 条
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="/static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+<script src="/static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+<script src="/static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script src="/static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+
+
+
+<script th:inline="javascript">
+
+    $('#blog-message').load(/*[[@{/footer/blogmessage}]]*/"/footer/blogmessage");
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('#payButton').popup({
+        popup : $('.payQR.popup'),
+        on : 'click',
+        position: 'bottom center'
+    });
+
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+    });
+
+    $('.toc.button').popup({
+        popup : $('.toc-container.popup'),
+        on : 'click',
+        position: 'left center'
+    });
+
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        position: 'left center'
+    });
+
+    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+    var qrcode = new QRCode("qrcode", {
+        text: serurl+url,
+        width: 110,
+        height: 110,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    $('#toTop-button').click(function () {
+        $(window).scrollTo(0,500);
+    });
+
+
+    var waypoint = new Waypoint({
+        element: document.getElementById('waypoint'),
+        handler: function(direction) {
+            if (direction == 'down') {
+                $('#toolbar').show(100);
+            } else {
+                $('#toolbar').hide(500);
+            }
+            console.log('Scrolled to waypoint!  ' + direction);
+        }
+    })
+
+    //评论表单验证
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入评论内容'
+                }
+                ]
+            },
+            content: {
+                identifier: 'nickName',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入你的大名'
+                }]
+            },
+            type: {
+                identifier: 'email',
+                rules: [{
+                    type: 'email',
+                    prompt: '请填写正确的邮箱地址'
+                }]
+            }
+        }
+    });
+
+    $(function () {
+        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
+    });
+
+
+
+    $('#commentpost-btn').click(function () {
+        var boo = $('.ui.form').form('validate form');
+        if (boo) {
+            console.log('校验成功');
+            postData();
+        } else {
+            console.log('校验失败');
+        }
+    });
+
+    function postData() {
+        $("#comment-container").load(/*[[@{/comments}]]*/"",{
+            "parentCommentId" : $("[name='parentCommentId']").val(),
+            "blogId" : $("[name='blogId']").val(),
+            "nickName": $("[name='nickName']").val(),
+            "email"   : $("[name='email']").val(),
+            "content" : $("[name='content']").val()
+        },function (responseTxt, statusTxt, xhr) {
+            $(window).scrollTo($('#goto'),500);
+            clearContent();
+        });
+    }
+
+    function clearContent() {
+        $("[name='nickName']").val('');
+        $("[name='email']").val('');
+        $("[name='content']").val('');
+        $("[name='parentCommentId']").val(-1);
+        $("[name='content']").attr("placeholder", "请输入评论信息...");
+    }
+
+    function reply(obj) {
+        var commentId = $(obj).data('commentid');
+        var commentNickName = $(obj).data('commentnickname');
+        $("[name='content']").attr("placeholder", "@"+commentNickName).focus();
+        $("[name='parentCommentId']").val(commentId);
+        $(window).scrollTo($('#comment-form'),500);
+    }
+
+
+</script>
+
+
+</body>
+</html>

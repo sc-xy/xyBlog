@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间轴</title>
+  <link href="/static/images/xyavatar.ico" th:href="@{/images/xyavatar.ico}" rel="icon" type="image/x-ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="/static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="/static/css/timeline.css" th:href="@{/css/timeline.css}">
+</head>
+<body class="archiveBody">
+
+<!--导航-->
+<nav class="gird-header">
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <a href="#" th:href="@{/}"><h2 class="ui olive header item" style="font-family: STSong">某洋</h2></a>
+      <a href="#" th:href="@{/}" class="m-item item m-mobile-hide "><i class="home icon"></i>首页</a>
+      <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
+      <a href="#" th:href="@{/archives}" class="active m-item item m-mobile-hide"><i class="clock icon"></i>时间轴</a>
+      <a href="#" th:href="@{/message}" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
+      <a href="#" th:href="@{/friends}" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友人帐</a>
+      <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+      <!--</div>-->
+      <div class="right m-item item m-mobile-hide">
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+          <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+            <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+<div class="doc-container m-padded-tb-massivex m-opacity" id="doc-container">
+  <th:block >
+    <section class="timeline">
+      <ul>
+
+        <li class="" th:each="blog : ${blogs}">
+          <div>
+            <time th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020/01/01</time>
+            <div class="scientist" >
+              <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+                <h3 class="state" style="text-align:center;font-size: 16px;color: #000;" th:text="${blog.title}">文章标题</h3>
+              </a>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+  </th:block>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--置顶图标-->
+<div id="toolbar" class="m-padded-tb-large m-fixed m-right-bottom">
+  <a href="#" class="ui teal icon button"><i class="chevron up icon"></i> </a>
+</div>
+
+<!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+  <!--容器-->
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="seven wide column">
+        <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+        <div class="ui inverted link list">
+          <div href="#" class="m-text-thin">Email：3148537853@qq.com</div>
+          <div href="#" class="m-text-thin">QQ：3148537853</div>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">小栈信息</div>
+        <!--<p id="htmer_time" class="item m-text-thin"></p>-->
+        <div id="blog-message">
+          <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+            <div class="m-text-thin" style="text-align: left;margin-left: 180px;">
+              文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 2000 </h2> 篇
+            </div>
+            <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+              访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 2000 </h2> 次
+            </div>
+            <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+              评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 2000 </h2> 条
+            </div>
+            <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+              留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 2000 </h2> 条
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="/static/lib/timeline/timeline.js" th:src="@{/lib/timeline/timeline.js}"></script>
+<script src="/static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+
+<!--雪花效果-->
+<script src="http://www.lmlblog.com/winter/templets/xq/js/snowy.js"></script>
+<script src="http://www.lmlblog.com/blog/12/js/Snow.js"></script>
+<style type="text/css">
+  .snow-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100001;}
+</style>
+<div class="snow-container"></div>
+
+<script>
+
+  $('#blog-message').load(/*[[@{/footer/blogmessage}]]*/"/footer/blogmessage");
+
+  $('.menu.toggle').click(function () {
+    $('.m-item').toggleClass('m-mobile-hide');
+  });
+
+</script>
+</body>
+</html>

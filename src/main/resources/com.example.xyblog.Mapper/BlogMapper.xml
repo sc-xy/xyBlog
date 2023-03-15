@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.BlogMapper">
+    <resultMap id="blog" type="com.example.xyblog.Queryvo.BlogQuery">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="recommend" column="recommend"/>
+        <result property="typeId" column="type_id"/>
+        <association property="type" javaType="com.example.xyblog.Bean.Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="user" type="com.example.xyblog.Bean.User">
+        <id property="id" column="id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="userName" column="uer_name"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+    <select id="listBlogs" resultMap="blog">
+        select b.id, b.title, b.update_time, b.recommend, b.type_id, t.id, t.name
+        from xuyang.t_blog b left outer join xuyang.t_type t
+        on b.type_id = t.id
+        order by b.update_time desc
+    </select>
+
+    <select id="getBlogById" resultType="com.example.xyblog.Queryvo.ShowBlog">
+        select b.id, b.title, b.content, b.type_id, b.picture, b.description, b.recommend, b.commentable, b.update_time
+        from xuyang.t_blog b where b.id = #{id}
+    </select>
+    
+    <select id="searchBlogs" parameterType="com.example.xyblog.Queryvo.SearchBlog" resultMap="blog">
+        <bind name="pattern" value="'%' + title + '%'"/>
+        select b.id, b.title, b.update_time, b.recommend, b.type_id, t.id, t.name  from xuyang.t_blog b, xuyang.t_type t
+        <where>
+            <if test="1 == 1">
+                b.type_id = t.id
+            </if>
+            <if test="typeId != null">
+                and b.type_id = #{typeId}
+            </if>
+            <if test="title != null">
+                and b.title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <!--  前端首页查询  -->
+    <resultMap id="firstPageBlog" type="com.example.xyblog.Queryvo.FirstPageBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="picture" column="picture"/>
+        <result property="views" column="views"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="description" column="description"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="typeName" column="name"/>
+    </resultMap>
+
+    <select id="getFirstPageBlogs" resultMap="firstPageBlog">
+        select b.id, b.title, b.picture, b.views, b.comment_count, b.description, b.update_time,
+        t.name
+        from xuyang.t_blog b, xuyang.t_type t
+        where b.type_id = t.id
+        order by b.update_time desc
+    </select>
+
+    <select id="getSearchBlog" resultMap="firstPageBlog">
+        <bind name="pattern" value="'%' + query + '%'"/>
+        select b.id, b.title, b.picture, b.views, b.comment_count, b.description, b.update_time,
+        t.name
+        from xuyang.t_blog b, xuyang.t_type t
+        where b.type_id = t.id and (b.title like #{pattern} or b.content like #{pattern})
+        order by b.update_time desc
+    </select>
+
+    <select id="getBlogsByTypeId" resultMap="firstPageBlog">
+        select b.id, b.title, b.picture, b.views, b.comment_count, b.description, b.update_time,
+        t.name
+        from xuyang.t_blog b, xuyang.t_type t
+        where b.type_id = #{id} and b.type_id = t.id
+        order by b.update_time desc
+    </select>
+
+    <!--  前端推荐博客查询  -->
+    <resultMap id="recommendBlog" type="com.example.xyblog.Queryvo.RecommendBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="picture" column="picture"/>
+        <result property="recommend" column="recommend"/>
+    </resultMap>
+
+    <select id="getRecommendBlogs" resultMap="recommendBlog">
+        select b.id, b.title, b.picture, b.recommend from xuyang.t_blog b
+        where b.recommend = true order by b.update_time desc limit 4
+    </select>
+
+<!--  查询博客详情  -->
+    <resultMap id="detailedBlog" type="com.example.xyblog.Queryvo.DetailedBlog">
+        <id property="id" column="id"/>
+        <result property="picture" column="picture"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="views" column="views"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="commentable" column="commentable"/>
+        <result property="typeName" column="name"/>
+    </resultMap>
+
+    <select id="getDetailedBlogById" resultMap="detailedBlog">
+        select b.id, b.picture, b.title, b.content, b.views, b.comment_count, b.commentable,
+        t.name
+        from xuyang.t_blog b, xuyang.t_type t
+        where b.type_id = t.id and b.id = #{id}
+    </select>
+
+    <update id="getCommentCountById">
+        update xuyang.t_blog b set b.comment_count = (
+        select count(*) from xuyang.t_comment c where c.blog_id = #{id}
+        ) where b.id = #{id}
+    </update>
+
+    <update id="updateViews">
+        update xuyang.t_blog b set b.views = b.views + 1 where b.id = #{id}
+    </update>
+
+    <select id="getBlogTotal" resultType="Integer">
+        select count(*) from xuyang.t_blog
+    </select>
+
+    <select id="getViewTotal" resultType="Integer">
+        select sum(views) from xuyang.t_blog
+    </select>
+
+    <select id="getCommentTotal" resultType="Integer">
+        select count(*) from xuyang.t_comment
+    </select>
+
+    <select id="getMessageTotal" resultType="Integer">
+        select count(*) from xuyang.t_message
+    </select>
+
+    <insert id="saveBlog" parameterType="com.example.xyblog.Bean.Blog">
+        insert into xuyang.t_blog (id, picture, title, content, views, comment_count, update_time, commentable, recommend, type_id, description)
+        values (#{id}, #{picture}, #{title}, #{content}, #{views}, #{commentCount}, #{updateTime}, #{commentable}, #{recommend}
+        , #{typeId}, #{description})
+    </insert>
+
+    <update id="updateBlog" parameterType="com.example.xyblog.Queryvo.ShowBlog">
+        update xuyang.t_blog set title = #{title}, content = #{content}, type_id = #{typeId}, picture = #{picture}
+        , description = #{description}, recommend = #{recommend}, commentable = #{commentable}, update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlogById">
+        delete from xuyang.t_blog where id =#{id}
+    </delete>
+
+<!--  时间轴博客查询  -->
+    <resultMap id="archiveBlog" type="com.example.xyblog.Queryvo.ArchiveBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="getArchiveBlogs" resultMap="archiveBlog">
+        select b.id, b.title, b.update_time
+        from xuyang.t_blog b
+        order by b.update_time desc
+    </select>
+
+
+</mapper>

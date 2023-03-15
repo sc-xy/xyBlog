@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.TypeMapper">
+    <!--查询所有分类-->
+    <select id="listTypes" resultType="com.example.xyblog.Bean.Type">
+        select * from xuyang.t_type
+        order by id desc
+    </select>
+    <!--根据id查分类-->
+    <select id="getType" resultType="com.example.xyblog.Bean.Type">
+        select * from xuyang.t_type where id=#{id}
+    </select>
+
+    <!--根据分类名称查询分类-->
+    <select id="getTypeByName" resultType="com.example.xyblog.Bean.Type">
+        select * from xuyang.t_type where name=#{name}
+    </select>
+
+    <!-- 保存分类-->
+    <insert id="saveType" parameterType="com.example.xyblog.Bean.Type">
+        insert into xuyang.t_type (id, name) values (#{id}, #{name})
+    </insert>
+    <!--更新分类-->
+    <update id="updateType" parameterType="com.example.xyblog.Bean.Type">
+        update xuyang.t_type set name = #{name} where id=#{id}
+    </update>
+
+    <!--删除分类-->
+    <delete id="deleteById">
+        delete from xuyang.t_type where id = #{id}
+    </delete>
+
+    <!--查询出所有分类和博客-->
+    <resultMap id="type" type="com.example.xyblog.Bean.Type">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="com.example.xyblog.Bean.Blog">
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+            <result property="typeId" column="type_id"/>
+        </collection>
+    </resultMap>
+    <select id="listTypesAndBlogs" resultMap="type">
+        select t.id tid, t.name, b.id bid, b.title,b.type_id from xuyang.t_type t,xuyang.t_blog b where t.id = b.type_id
+    </select>
+
+</mapper>

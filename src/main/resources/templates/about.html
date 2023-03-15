@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于某洋</title>
+    <link href="/static/images/xyavatar.ico" th:href="@{/images/xyavatar.ico}" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body class="aboutBody">
+
+<!--导航-->
+<nav class="gird-header">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <a href="#" th:href="@{/}"><h2 class="ui olive header item" style="font-family: STSong">某洋</h2></a>
+            <a href="#" th:href="@{/}" class="active m-item item"><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item"><i class="clone outline icon"></i>分类</a>
+            <a href="#" th:href="@{/archives}" class="m-item item"><i class="clock icon"></i>时间轴</a>
+            <a href="#" th:href="@{/message}" class="m-item item"><i class="book icon"></i>留言板</a>
+            <a href="#" th:href="@{/friends}" class="m-item item"><i class="pencil alternate icon"></i>友人帐</a>
+            <a href="#" th:href="@{/about}" class="m-item item"><i class="info icon"></i>关于我</a>
+            <!--</div>-->
+            <div class="right m-item item m-mobile-hide">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+                        <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<!--顶部背景图片-->
+<div class="m-bg-type_outer" style="width: 100%;height: 40%">
+    <img src="/static/images/aboutbg.jpg" th:src="@{/images/aboutbg.jpg}" alt="" class="ui m-bg image" style="width: 100%;height: 100%;opacity: 0.7">
+    <div class="m-bg-class_cover">
+        <div class="ui container" style="position: relative ;bottom: -540px;">
+            <div class="m-font-size-title" align="center" style="font-family:'STXingkai'">关于我</div>
+            <div class="m-font-size-text-init-title m-margin-top" align="center">人活一世，随心而动</div>
+        </div>
+    </div>
+</div>
+
+<!--个人资料描述-->
+<div class="ui container m-opacity box-shadow-max">
+    <div class="ui segment m-margin-" align="center">
+        <div class="m-margin-top-large" align="center">
+            <img class="ui circular image" align="center" src="../static/images/xyavatar.jpg" th:src="@{/images/xyavatar.jpg}" style="width: 150px;height: 150px;">
+        </div>
+        <div class="m-margin-top-small" style="font-size: x-large;font-family: STSong" align="center">某洋</div>
+
+        <div class="m-margin-top" align="center">
+            <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+            <a href="#" class="ui qq circular icon button" data-content="3148537853" data-position="bottom center"><i class="qq icon"></i></a>
+            <a href="https://github.com/sc-xy" target="_blank" class="ui github circular icon button" data-content="点击跳转GitHub" data-position="bottom center"><i class="github icon"></i></a>
+            <a href="#" class="ui email circular icon button" data-content="3148537853@qq.com" data-position="bottom center"><i class="envelope  icon"></i></a>
+        </div>
+
+        <div class="ui wechat-qr flowing popup transition hidden">
+            <img src="../static/images/WeChat.jpg" th:src="@{/images/qingFengWeChat.jpg}" alt="" class="ui rounded image" style="width: 110px">
+            <div align="center">微信</div>
+        </div>
+        <div class="ui qq-qr flowing popup transition hidden">
+            <img src="../static/images/qq.jpg" th:src="@{/images/qq.jpg}" alt="" class="ui rounded image" style="width: 110px">
+            <div align="center">QQ</div>
+        </div>
+        <hr class="m-margin-top-small" style="width: 20%">
+        <br>
+        <div>
+            <p>“客官，您好”</p>
+            <p>“这里是“某洋の博客””</p>
+            <p>“我是“某洋”，一个不善言辞的人”</p>
+            <br>
+            <p>00后</p>
+            <p>爱编程、爱游戏、爱做梦</p>
+            <p>与您共同活在这个魔幻的世界</p>
+            <p>如一叶扁舟</p>
+            <p>漂泊半生</p>
+            <p>随遇而安</p>
+        </div>
+        <hr class="m-margin-top-large">
+        <br>
+    </div>
+</div>
+
+<br>
+<br>
+
+<!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="seven wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+                <div class="ui inverted link list">
+                    <div href="#" class="m-text-thin">Email：3148537853@qq.com</div>
+                    <div href="#" class="m-text-thin">QQ：3148537853</div>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
+                <div id="blog-message">
+                    <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 2000 </h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 2000 </h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 2000 </h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 180px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 2000 </h2> 条
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+
+<script>
+
+    $('#blog-message').load(/*[[@{/footer/blogmessage}]]*/"/footer/blogmessage");
+
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    // 显示公众号
+    $('.tencent').popup({
+        popup : $('.tencent-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示微信
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示QQ
+    $('.qq').popup({
+        popup : $('.qq-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示邮箱
+    $('.email').popup();
+
+    // 显示CSDN
+    $('.csdn').popup();
+
+    // 显示github
+    $('.github').popup();
+
+</script>
+
+</body>
+</html>

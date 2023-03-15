@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.FriendLinkMapper">
+    <resultMap id="friendLink" type="com.example.xyblog.Bean.FriendLink">
+        <id property="id" column="id"/>
+        <result property="linkDes" column="link_des"/>
+        <result property="linkAddress" column="link_address"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+    <select id="getFriendLinks" resultMap="friendLink">
+        select f.id, f.link_des, f.link_address, f.avatar
+        from xuyang.t_friend f
+    </select>
+
+    <select id="getFriendLinkByAddress" resultMap="friendLink">
+        select f.id, f.link_des, f.link_address, f.avatar
+        from xuyang.t_friend f
+        where f.link_address = #{linkAddress}
+    </select>
+
+    <select id="getFriendLinkById" resultMap="friendLink">
+        select f.id, f.link_des, f.link_address, f.avatar
+        from xuyang.t_friend f
+        where f.id = #{id}
+    </select>
+
+    <insert id="saveFriendLink">
+        insert into xuyang.t_friend (id, link_des, link_address, avatar) values(#{id}, #{linkDes}, #{linkAddress}, #{avatar})
+    </insert>
+
+    <update id="updateFriendLink" parameterType="com.example.xyblog.Bean.FriendLink">
+        update xuyang.t_friend f set f.link_des = #{linkDes}, f.link_address = #{linkAddress} , f.avatar = #{avatar}
+        where f.id = #{id}
+    </update>
+
+    <delete id="deleteFriendLink">
+        delete from xuyang.t_friend
+        where id = #{id}
+    </delete>
+</mapper>

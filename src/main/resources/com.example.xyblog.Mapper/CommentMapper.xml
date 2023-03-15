@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.xyblog.Mapper.CommentMapper">
+    <resultMap id="comment" type="com.example.xyblog.Bean.Comment">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="content" column="content"/>
+        <result property="avatar" column="avatar"/>
+        <result property="createTime" column="create_time"/>
+        <result property="blogId" column="blog_id"/>
+        <result property="parentCommentId" column="parent_comment_id"/>
+        <result property="adminComment" column="admin_comment"/>
+    </resultMap>
+
+    <select id="findByBlogIdParentIdNull" resultMap="comment">
+        select c.id, c.email, c.nick_name, c.content, c.avatar, c.create_time, c.blog_id, c.parent_comment_id, c.parent_nick_name, c.admin_comment
+        from xuyang.t_comment c
+        where c.blog_id = #{blogId} and c.parent_comment_id = #{parentId}
+     </select>
+
+    <select id="findByBlogIdParentIdNotNull" resultMap="comment">
+        select c.id, c.email, c.nick_name, c.content, c.avatar, c.create_time, c.blog_id, c.parent_comment_id, c.parent_nick_name, c.admin_comment
+        from xuyang.t_comment c
+        where c.blog_id = #{blogId} and c.parent_comment_id = #{id}
+    </select>
+
+    <select id="findByBlogIdAndReplyId" resultMap="comment">
+        select c.id, c.email, c.nick_name, c.content, c.avatar, c.create_time, c.blog_id, c.parent_comment_id, c.parent_nick_name, c.admin_comment
+        from xuyang.t_comment c
+        where c.blog_id = #{blogId} and c.parent_comment_id = #{childId}
+    </select>
+
+    <insert id="saveComment" parameterType="com.example.xyblog.Bean.Comment">
+        insert into xuyang.t_comment (email, nick_name, content, avatar, create_time, blog_id, parent_comment_id, admin_comment)
+        values (#{email}, #{nickName}, #{content}, #{avatar}, #{createTime}, #{blogId}, #{parentCommentId}, #{adminComment})
+    </insert>
+
+    <delete id="deleteComment">
+        delete from xuyang.t_comment where id = #{id}
+    </delete>
+
+    <delete id="deleteCommentByBlogId">
+        delete from xuyang.t_comment where blog_id = #{blogId}
+    </delete>
+</mapper>
