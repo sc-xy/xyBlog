@@ -99,20 +99,6 @@ create table `t_message`
   default charset = utf8
   row_format = dynamic;
 
-drop table if exists `t_picture`;
-
-create table `t_picture`
-(
-    `id`      bigint(20) not null auto_increment,
-    `name`    varchar(225) default null,
-    `address` varchar(225) default null,
-    primary key (`id`)
-) engine = InnoDB
-  auto_increment = 2
-  default charset = utf8
-  row_format = dynamic;
-
-
 drop table if exists `t_user`;
 
 create table `t_user`
