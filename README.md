@@ -32,23 +32,33 @@
 
 采用Maven进行包管理，加之SpringBoot官方已经封装了不少依赖包，添加第三方依赖只需要保证依赖不冲突即可
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234343.png)
+
 ## 五、后台管理界面
 
 ### 1.1 后台登陆
 
 对用户名密码进行校验，对管理员路径进行拦截，虽然本项目主要考虑的是单人博客，但是仍旧可以改进为多用户发布博客（战未来！）
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234440.png)
+
 ### 1.2 博客管理
 
 实现了对博客的增删查改等基础功能，支持全局查询、关键字模糊查询、博客分页展示和多条件查询
+
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234529.png)
 
 ### 1.3 分类管理
 
 实现了对分类的增删改等基础功能，同时保证不会删除仍旧博客属于的类别
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234618.png)
+
 ### 1.4 友链管理
 
 实现了对友链的增删改等基础功能
+
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234640.png)
 
 ## 六、前端页面展示
 
@@ -56,25 +66,37 @@
 
 支持对博客的分页查询，全局查询，能够推送推荐博客以及支持博客名称模糊查询，在允许评论的博客下用户输入自己的QQ号即可评论（通过调用api抓取用户的昵称和头像），主要难点是评论的回复功能实现以及楼中楼显示
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234744.png)
+
 ### 1.2 分类展示
 
 实现了指定分类查询
+
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234836.png)
 
 ### 1.3 时间轴展示
 
 实现对博客进行全局查询并根据更新时间进行排序
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234903.png)
+
 ### 1.4 留言板展示
 
 实现对留言进行全局查询和楼中楼展示
+
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315234935.png)
 
 ### 1.5 友链展示
 
 实现了对友链进行全局查询
 
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315235001.png)
+
 ### 1.6 关于页面
 
 关于作者（静态展示）
+
+![](https://gcore.jsdelivr.net/gh/sc-xy/Blogimg@main/img/20230315235023.png)
 
 ## 七、项目部署
 
