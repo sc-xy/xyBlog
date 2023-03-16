@@ -117,7 +117,7 @@
                                     <div class="content">
                                         <a class="author">
                                             <span th:text="${reply.nickName}">小红</span>
-                                            <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminMessage}">栈主</div>
+                                            <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminMessage}">博主</div>
                                             &nbsp;<span th:text="|@ ${reply.parentNickName}|" class="m-teal">@ 小白</span>
                                         </a>
                                         <div class="metadata">
@@ -175,7 +175,7 @@
             </div>
 
             <div class="seven wide column">
-                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">小栈信息</div>
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
                 <!--<p id="htmer_time" class="item m-text-thin"></p>-->
                 <div id="blog-message">
                     <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
