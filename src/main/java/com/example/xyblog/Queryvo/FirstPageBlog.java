@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
+
 // 首页数据实体
 @Data
 public class FirstPageBlog {
@@ -21,6 +22,8 @@ public class FirstPageBlog {
     private String description;
     // 博客更新时间
     private Date updateTime;
+    // 博客类别Id
+    private Long typeId;
     // 博客类别
     private String typeName;
 
@@ -34,6 +37,7 @@ public class FirstPageBlog {
                 ",commentCount=" + commentCount +
                 ",description='" + description + '\'' +
                 ",updateTime=" + updateTime +
+                ",typeId=" + typeId +
                 ",typeName='" + typeName + '\'' +
                 '}';
     }
