@@ -115,7 +115,6 @@
 
             <div class="ui right aligned container">
                 <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
-                <button type="button" id="save-btn" class="ui secondary button">保存</button>
                 <button type="button" id="publish-btn" class="ui teal button">发布</button>
             </div>
 
@@ -139,7 +138,7 @@
                 </div>
             </div>
 
-            <div class="four wide column">
+            <div class="seven wide column">
                 <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
                 <!--<p id="htmer_time" class="item m-text-thin"></p>-->
                 <div id="blog-message">
@@ -194,14 +193,9 @@
         on : 'hover'
     });
 
-    $('#save-btn').click(function () {
-        $('[name="published"]').val(false);
-        $('#blog-form').submit();
-    });
 
 
     $('#publish-btn').click(function () {
-        $('[name="published"]').val(true);
         $('#blog-form').submit();
     });
 
