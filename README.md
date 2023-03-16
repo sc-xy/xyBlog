@@ -4,6 +4,13 @@
 
 博客主页：[某洋の博客 (sc-xy.top)](http://springblog.sc-xy.top/) ~详细的~搭建思路会在博客中给出
 
+开始运行
+1. 数据库运行`xyblog.sql`创建数据库~记得在user表中添加管理员用户~
+2. 修改`application.yml`中的配置文件，切换项目为`dev`(开发)
+3. 修改`application-dev.yml` `application-pro.yml`中的数据库地址，用户，密码
+4. 运行`XyBlogApplication`测试项目是否正常工作
+5. 打包后`java -jar *.jar`
+
 ## 一、 技术栈
 
 |   工具   |           选择           |

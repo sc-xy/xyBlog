@@ -116,6 +116,3 @@ create table `t_user`
   AUTO_INCREMENT = 2
   DEFAULT CHARSET = utf8
   ROW_FORMAT = DYNAMIC;
-
-insert into t_user (id, is_admin, nick_name, user_name, pass_word)
-values (1, 1, 'xuyang', 'xuyang', 'dff8992652bfae6a2dbf72327c4d2be2');
